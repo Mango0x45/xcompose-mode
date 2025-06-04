@@ -46,7 +46,7 @@
                     "\\.XCompose\\'"
                     (getenv "XCOMPOSEFILE")))
   (when path
-    (add-to-list 'auto-mode-alist path)))
+    (add-to-list 'auto-mode-alist (cons path 'xcompose-mode))))
 
 
 ;;; Faces
