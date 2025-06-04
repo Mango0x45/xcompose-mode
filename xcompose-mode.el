@@ -202,6 +202,7 @@
       ('string-codepoint
        (insert (format "\"%c\" U%04X" rune rune))))))
 
+;;;###autoload
 (define-derived-mode xcompose-mode conf-mode "XCompose"
   "Major mode for .XCompose files
 
