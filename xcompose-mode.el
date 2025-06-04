@@ -41,6 +41,13 @@
 
 ;;; Code:
 
+;;;###autoload
+(dolist (path (list "\\`/usr/share/X11/locale/[^/]+/Compose\\'"
+                    "\\.XCompose\\'"
+                    (getenv "XCOMPOSEFILE")))
+  (when path
+    (add-to-list 'auto-mode-alist path)))
+
 
 ;;; Faces
 
