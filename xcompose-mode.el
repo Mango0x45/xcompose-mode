@@ -54,42 +54,42 @@
 (defface xcompose-angle-face
   '((t (:inherit bold)))
   "Face for the angle brackets (<>) around key-names."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-keys-face
   '((t (:inherit font-lock-constant-face)))
   "Face for the key names."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-string-face
   '((t (:inherit font-lock-string-face)))
   "Face for the quoted strings containing the character(s) to be produced."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-number-face
   '((t (:inherit font-lock-preprocessor-face :weight bold)))
   "Face for the hex numbers identifying the code-point."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-colon-face
   '((t (:inherit bold)))
   "Face for the \":\" separating the keystrokes from the character string."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-keyword-face
   '((t (:inherit font-lock-keyword-face)))
   "Face for keywords."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-modifier-face
   '((t (:inherit font-lock-keyword-face)))
   "Face for modifiers."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 (defface xcompose-modifier-prefix-face
   '((t . ()))
   "Face for modifier prefixes."
-  :group 'xcompose-mode)
+  :group 'xcompose)
 
 
 ;;; Customisable Variables
@@ -206,6 +206,7 @@
   "Major mode for .XCompose files
 
 \\{xcompose-mode-map}"
+  :group 'xcompose
   (font-lock-add-keywords nil xcompose-font-lock-keywords)
   (setq-local comment-start "# "
               comment-start-skip "#+\\s-*"
