@@ -6,7 +6,7 @@
 ;; Created:  June 2025
 ;; Keywords: languages xcompose
 ;; URL:      https://git.thomasvoss.com/xcompose-mode
-;; Version:  1.0.0
+;; Version:  1.1.0
 
 ;; Permission is hereby granted, free of charge, to any person
 ;; obtaining a copy of this software and associated documentation
