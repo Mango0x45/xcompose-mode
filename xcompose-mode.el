@@ -218,7 +218,7 @@
        (insert ?\" rune ?\"))
       ('string-codepoint
        (insert (format "\"%c\" U%04X" rune rune))))))
-;; <a> <b> <c> <minus> <braceleft>
+
 ;;;###autoload
 (define-derived-mode xcompose-mode conf-mode "XCompose"
   "Major mode for .XCompose files
