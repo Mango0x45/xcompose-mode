@@ -146,6 +146,23 @@
 (defvar xcompose-key-regexp "<[a-zA-Z0-9_]+"
   "Regexp matching the beginning of a keystroke.")
 
+(defvar xcompose--char-name-table
+  (let ((ht (make-hash-table :test #'eq))
+        (pairs '((#x20 . "space") (?! . "exclam") (?\" . "quotedbl")
+                 (?# . "numbersign") (?$ . "dollar") (?% . "percent")
+                 (?& . "ampersand") (?\' . "apostrophe") (?\( . "parenleft")
+                 (?\) . "parenright") (?* . "asterisk") (?+ . "plus")
+                 (?, . "comma") (?- . "minus") (?. . "period") (?/ . "slash")
+                 (?: . "colon") (?\; . "semicolon") (?< . "less") (?= . "equal")
+                 (?> . "greater") (?? . "question") (?@ . "at")
+                 (?\[ . "bracketleft") (?\\ . "backslash")
+                 (?\] . "bracketright") (?^ . "asciicircum") (?_ . "underscore")
+                 (?` . "grave") (?\{ . "braceleft") (?| . "bar")
+                 (?\} . "braceright") (?~ . "asciitilde"))))
+    (dolist (pair pairs)
+      (puthash (car pair) (cdr pair) ht))
+    ht))
+
 ;; I wonder if this will be useful or really annoying.
 (define-abbrev-table 'xcompose-mode-abbrev-table
   '(("<am"       "<ampersand>"    nil :system t)
@@ -185,7 +202,7 @@
 ;;; Functions
 
 (defun xcompose--insert-key (key)
-  (insert ?< key "> "))
+  (insert ?< (gethash key xcompose--char-name-table key) "> "))
 
 (defun xcompose-insert-rule ()
   "TODO"
@@ -201,7 +218,7 @@
        (insert ?\" rune ?\"))
       ('string-codepoint
        (insert (format "\"%c\" U%04X" rune rune))))))
-
+;; <a> <b> <c> <minus> <braceleft>
 ;;;###autoload
 (define-derived-mode xcompose-mode conf-mode "XCompose"
   "Major mode for .XCompose files
