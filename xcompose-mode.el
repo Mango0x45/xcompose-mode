@@ -5,7 +5,7 @@
 ;; Author:   Thomas Voss <mail@thomasvoss.com>
 ;; Created:  June 2025
 ;; Keywords: languages xcompose
-;; URL:      https://git.thomasvoss.com/xcompose-mdoe
+;; URL:      https://git.thomasvoss.com/xcompose-mode
 ;; Version:  1.0.0
 
 ;; Permission is hereby granted, free of charge, to any person
