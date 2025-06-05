@@ -100,7 +100,10 @@
   :group 'languages)
 
 (defcustom xcompose-rule-style 'string-codepoint
-  "TODO"
+  "Rule style to use for `xcompose-insert-rule.'
+
+XCompose rules may include a codepoint, a string, or both.  For more
+details, checkout the xcompose(5) manual page."
   :type '(choice (const :tag "Codepoint only" codepoint)
                  (const :tag "String and codepoint" string-codepoint)
                  (const :tag "String only" string))
@@ -121,13 +124,13 @@
                     (?}  . "|   ")))
       (modify-syntax-entry (car pair) (cdr pair) st))
     st)
-  "Syntax table for xcompose-mode")
+  "Syntax table for `xcompose-mode'.")
 
 (defvar xcompose-mode-map
   (let ((map (make-sparse-keymap)))
     (keymap-set map "C-c C-i" #'xcompose-insert-rule)
     map)
-  "Keymap for xcompose-mode")
+  "Keymap for `xcompose-mode'.")
 
 (defvar xcompose--modifier-rx
   (regexp-opt '("Ctrl" "Lock" "Caps" "Shift" "Alt" "Meta" "None")))
@@ -141,10 +144,7 @@
     ("[!~]"                  . 'xcompose-modifier-prefix-face)
     (":"                     . 'xcompose-colon-face)
     ("^[ \t]*include"        . 'xcompose-keyword-face))
-  "Keywords for xcompose-mode")
-
-(defvar xcompose-key-regexp "<[a-zA-Z0-9_]+"
-  "Regexp matching the beginning of a keystroke.")
+  "Keywords for `xcompose-mode'.")
 
 (defvar xcompose--char-name-table
   (let ((ht (make-hash-table :test #'eq))
@@ -163,13 +163,14 @@
       (puthash (car pair) (cdr pair) ht))
     ht))
 
-;; I wonder if this will be useful or really annoying.
 (define-abbrev-table 'xcompose-mode-abbrev-table
-  '(("<am"       "<ampersand>"    nil :system t)
+  '(("<Mu"       "<Multi_key>"    nil :system t)
+    ("<am"       "<ampersand>"    nil :system t)
     ("<ap"       "<apostrophe>"   nil :system t)
     ("<asciic"   "<asciicircum>"  nil :system t)
     ("<asciit"   "<asciitilde>"   nil :system t)
     ("<ast"      "<asterisk>"     nil :system t)
+    ("<at"       "<at>"           nil :system t)
     ("<bac"      "<backslash>"    nil :system t)
     ("<bar"      "<bar>"          nil :system t)
     ("<bracel"   "<braceleft>"    nil :system t)
@@ -179,6 +180,8 @@
     ("<col"      "<colon>"        nil :system t)
     ("<com"      "<comma>"        nil :system t)
     ("<do"       "<dollar>"       nil :system t)
+    ("<eq"       "<equal>"        nil :system t)
+    ("<ex"       "<exclam>"       nil :system t)
     ("<gra"      "<grave>"        nil :system t)
     ("<gre"      "<greater>"      nil :system t)
     ("<le"       "<less>"         nil :system t)
@@ -189,12 +192,13 @@
     ("<perc"     "<percent>"      nil :system t)
     ("<peri"     "<period>"       nil :system t)
     ("<pl"       "<plus>"         nil :system t)
+    ("<que"      "<question>"     nil :system t)
     ("<quo"      "<quotedbl>"     nil :system t)
     ("<se"       "<semicolon>"    nil :system t)
+    ("<sl"       "<slash>"        nil :system t)
     ("<sp"       "<space>"        nil :system t)
-    ("<un"       "<underscore>"   nil :system t)
-    ("<Mu"       "<Multi_key>"    nil :system t))
-  "Abbrev table"
+    ("<un"       "<underscore>"   nil :system t))
+  "Abbreviation table for `compose-mode'."
   :regexp "\\(<[a-zA-Z0-9_]+\\)"
   :case-fixed t)
 
@@ -205,7 +209,11 @@
   (insert ?< (gethash key xcompose--char-name-table key) "> "))
 
 (defun xcompose-insert-rule ()
-  "TODO"
+  "Insert a new remapping rule at point.
+
+Reads a key sequence and a resulting rune from the minibuffer, and
+inserts the corresponding remapping rule at point.  The style of the rule
+is determined by the variable `xcompose-rule-style'."
   (interactive)
   (let ((keys (vconcat (read-string (format-prompt "Key sequence" nil))))
         (rune (read-char-from-minibuffer (format-prompt "Resulting rune" nil))))
