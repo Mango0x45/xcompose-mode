@@ -1,0 +1,4 @@
+* XCompose Major Mode
+
+This package provides a major-mode for editing XCompose files.  This mode
+implements syntax highlighting, abbreviations, and editing functions.
